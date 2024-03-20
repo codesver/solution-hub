@@ -3,31 +3,37 @@ import java.util.Arrays;
 
 public class Main {
 
-    private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private static final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
-    private static final StringBuilder result = new StringBuilder();
+    private final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private final BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+    private final StringBuilder result = new StringBuilder();
 
-    private static void solution() throws IOException {
-        String numberStr = reader.readLine();
-        int number = Integer.parseInt(numberStr);
-        result.append(0);
-        for (int num = 1; num < number; num++) {
-            int splitSum = num + Arrays.stream(String.valueOf(num).split("")).mapToInt(Integer::parseInt).sum();
-            if (splitSum == number) {
-                result.deleteCharAt(0).append(num);
+    private void solve() throws IOException {
+        int N = Integer.parseInt(reader.readLine());
+
+
+        for (int m = Math.max(0, N - String.valueOf(N).length() * 9); m < N; m++) {
+            int sum = m + Arrays.stream(String.valueOf(m).split(""))
+                    .mapToInt(Integer::parseInt)
+                    .sum();
+            if (sum == N) {
+                result.append(m);
                 break;
             }
         }
+
+        if (result.length() == 0) {
+            result.append(0);
+        }
     }
 
-    private static void finish() throws IOException {
+    private void submit() throws IOException {
         writer.write(result.toString());
         writer.flush();
-        writer.close();
     }
 
     public static void main(String[] args) throws IOException {
-        solution();
-        finish();
+        Main main = new Main();
+        main.solve();
+        main.submit();
     }
 }
