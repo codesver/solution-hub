@@ -1,0 +1,9 @@
+import java.util.Arrays;
+import java.lang.StringBuilder;
+
+class Solution {
+    public int[] solution(long n) {
+        return Arrays.stream(new StringBuilder(String.valueOf(n)).reverse().toString().split(""))
+            .mapToInt(Integer::parseInt).toArray();
+    }
+}
